@@ -2,12 +2,13 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: './src/index.js',
   output: {
-    path: __dirname + '/dist',
+    // eslint-disable-next-line no-path-concat
+    path: __dirname + 'build',
     publicPath: '/',
     filename: 'bundle.js;',
   },
   devServer: {
-    contentBase: './dist',
+    contentBase: './build',
   },
   module: {
     rules: [
@@ -15,6 +16,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: ['babel-loader', 'eslint-loader'],
+      },
+      {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
       },
     ],
   },
